@@ -70,16 +70,12 @@
       position: absolute;
       font-size: 28px;
       opacity: 0.6;
-      animation: float 5s linear infinite;
+      animation: float linear infinite;
     }
 
     @keyframes float {
-      from {
-        transform: translateY(100vh) rotate(0deg);
-      }
-      to {
-        transform: translateY(-10vh) rotate(360deg);
-      }
+      0% { transform: translateY(100vh) rotate(0deg); }
+      100% { transform: translateY(-10vh) rotate(360deg); }
     }
 
     @keyframes fade {
@@ -128,7 +124,7 @@
 <!-- SLIDE 6 -->
 <div class="slide">
   <h1>Will you be my valentines?!?!?!?! 💕</h1>
-  <button onclick="yes()">YES</button>
+  <button onclick="yes(this)">YES</button>
   <button onclick="no()">NO</button>
 </div>
 
@@ -157,34 +153,38 @@
     slides[current].classList.add('active');
   }
 
-  function yes() {
+  function yes(button) {
+    // Remove the YES button after clicking
+    if (button) button.remove();
+
     slides[current].classList.remove('active');
     current++;
     slides[current].classList.add('active');
   }
 
   function no() {
+    // Create one YES button at a random position
     const btn = document.createElement('button');
     btn.textContent = 'YES';
     btn.style.position = 'absolute';
     btn.style.left = Math.random() * 90 + 'vw';
     btn.style.top = Math.random() * 80 + 'vh';
-    btn.onclick = yes;
+    btn.onclick = () => yes(btn); // click removes it
     document.body.appendChild(btn);
   }
 
-  // Floating hearts everywhere
+  // Floating hearts
   const heartContainer = document.querySelector('.hearts');
   for (let i = 0; i < 35; i++) {
     const heart = document.createElement('div');
     heart.className = 'heart';
     heart.textContent = '❤️';
     heart.style.left = Math.random() * 100 + 'vw';
-    heart.style.animationDuration = 5 + Math.random() * 5 + 's';
+    heart.style.animationDuration = 4 + Math.random() * 6 + 's';
+    heart.style.fontSize = 20 + Math.random() * 20 + 'px';
     heartContainer.appendChild(heart);
   }
 </script>
 
 </body>
 </html>
-
