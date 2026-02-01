@@ -151,6 +151,12 @@
     slides[current].classList.remove('active');
     current++;
     slides[current].classList.add('active');
+
+    // Remove all YES buttons when reaching final slide
+    if (current === slides.length - 1) {
+      const yesButtons = document.querySelectorAll('body > button');
+      yesButtons.forEach(btn => btn.remove());
+    }
   }
 
   function yes(button) {
@@ -160,6 +166,10 @@
     slides[current].classList.remove('active');
     current++;
     slides[current].classList.add('active');
+
+    // Remove any remaining YES buttons
+    const yesButtons = document.querySelectorAll('body > button');
+    yesButtons.forEach(btn => btn.remove());
   }
 
   function no() {
@@ -169,11 +179,11 @@
     btn.style.position = 'absolute';
     btn.style.left = Math.random() * 90 + 'vw';
     btn.style.top = Math.random() * 80 + 'vh';
-    btn.onclick = () => yes(btn); // click removes it
+    btn.onclick = () => yes(btn); // clicking removes it
     document.body.appendChild(btn);
   }
 
-  // Floating hearts
+  // Floating hearts all over the screen
   const heartContainer = document.querySelector('.hearts');
   for (let i = 0; i < 35; i++) {
     const heart = document.createElement('div');
