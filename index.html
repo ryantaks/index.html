@@ -41,6 +41,15 @@
       color: #333;
     }
 
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1.1em;
+      border-radius: 10px;
+      border: 2px solid #d6336c;
+      margin-top: 10px;
+      width: 60%;
+    }
+
     button {
       background-color: #ff4d6d;
       color: white;
@@ -109,10 +118,12 @@
   <button onclick="nextSlide()">okay...</button>
 </div>
 
-<!-- SLIDE 4 -->
+<!-- SLIDE 4: Text input -->
 <div class="slide">
   <h2>Are you available February 14th? 😏</h2>
-  <button onclick="nextSlide()">what.</button>
+  <input type="text" id="valentineMessage" placeholder="Type your message here...">
+  <br>
+  <button onclick="saveMessage()">submit</button>
 </div>
 
 <!-- SLIDE 5 -->
@@ -121,14 +132,30 @@
   <button onclick="nextSlide()">okay 😳</button>
 </div>
 
-<!-- SLIDE 6 -->
+<!-- SLIDE 6: Will you be my valentine -->
 <div class="slide">
   <h1>Will you be my valentines?!?!?!?! 💕</h1>
   <button onclick="yes(this)">YES</button>
   <button onclick="no()">NO</button>
 </div>
 
-<!-- SLIDE 7 -->
+<!-- SLIDE 7: Cute slide -->
+<div class="slide">
+  <h2>Just for you 💖</h2>
+  <p>You are my favorite human in the whole world 😘</p>
+  <!-- Optional image -->
+  <!-- <img src="cute-heart.jpg" alt="Cute Valentine" style="max-width: 80%; border-radius: 15px; margin-top: 20px;"> -->
+  <button onclick="nextSlide()">next</button>
+</div>
+
+<!-- SLIDE 8: Love message slide -->
+<div class="slide">
+  <h1>I love you very much, baby 💕</h1>
+  <p>I hope you are having an amazing day, my love!</p>
+  <button onclick="nextSlide()">❤️</button>
+</div>
+
+<!-- SLIDE 9: Final YAY slide -->
 <div class="slide">
   <h1>YAYYYYY 💖💖💖</h1>
   <p>
@@ -152,7 +179,7 @@
     current++;
     slides[current].classList.add('active');
 
-    // Remove all YES buttons when reaching final slide
+    // Remove all YES buttons when reaching the final slide
     if (current === slides.length - 1) {
       const yesButtons = document.querySelectorAll('body > button');
       yesButtons.forEach(btn => btn.remove());
@@ -181,6 +208,15 @@
     btn.style.top = Math.random() * 80 + 'vh';
     btn.onclick = () => yes(btn); // clicking removes it
     document.body.appendChild(btn);
+  }
+
+  function saveMessage() {
+    const input = document.getElementById('valentineMessage');
+    const message = input.value.trim();
+    if (message) {
+      alert("Your message has been saved: " + message);
+    }
+    nextSlide();
   }
 
   // Floating hearts all over the screen
